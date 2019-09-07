@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import { observer, inject } from 'mobx-react'
+import  Grid  from '@material-ui/core/Grid'
 import FavoriteCityCard from './FavoriteCityCard'
-import { Grid } from '@material-ui/core'
-
 
 @inject("favoritesStore")
 

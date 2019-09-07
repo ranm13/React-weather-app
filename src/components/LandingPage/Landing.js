@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import SearchBar from './SearchBar';
-import CityWeather from './CityWeather';
-import { Grid  } from '@material-ui/core'
-
+import Grid  from '@material-ui/core/Grid'
+import SearchBar from './SearchBar'
+import CityWeather from './CityWeather'
 
 class Landing extends Component {
     render() {
@@ -19,7 +18,6 @@ class Landing extends Component {
                 </Grid>
             </Grid>   
         </div>
-        
         )
     }
 }

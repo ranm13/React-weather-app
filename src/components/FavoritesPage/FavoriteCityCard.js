@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
-import { Card, Grid, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
+import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card'
+import Typography from '@material-ui/core/Typography'
 
-@inject("cityStore")
+@inject("cityStore", "navStore")
 
 @observer
 class FavoriteCityCard extends Component {
@@ -20,7 +22,8 @@ class FavoriteCityCard extends Component {
 
     render() {
         let cityData = this.props.cityData
-        let tempData = cityData.currentConditions.temperature.Metric
+        let navStore = this.props.navStore
+        let tempData = (navStore.isCelsius? cityData.currentConditions.temperature.Metric: cityData.currentConditions.temperature.Imperial)
         return (
             <Grid item to='/' component={Link} onClick={this.searchThisCity} style={{textDecoration: 'none'}}>
                 <Card>

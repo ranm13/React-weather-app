@@ -1,15 +1,24 @@
 import React, {Component} from 'react'
-import { Card, Grid, Typography } from '@material-ui/core'
+import { observer, inject } from 'mobx-react'
 import moment from 'moment'
+import Card from '@material-ui/core/Card'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
+
+@inject( "navStore")
+
+@observer
 
 class DailyWeather extends Component {
-    
     getDay = (date) => {
         const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
         return dayNames[moment(date).day()]
     }
-    
+
+    celsiusToFahrenheitConventer = (temp) => Math.round(temp * 1.8 + 32) 
+
     render() {
+        let navStore = this.props.navStore
         let temp = this.props.temp
         let date = this.props.date
         return (
@@ -23,7 +32,7 @@ class DailyWeather extends Component {
                         </Grid>
                         <Grid item>
                             <Typography variant="h6">
-                                {temp.Maximum.Value}°{temp.Maximum.Unit}
+                                {navStore.isCelsius? `${temp.Maximum.Value}°${temp.Maximum.Unit}`: this.celsiusToFahrenheitConventer(temp.Maximum.Value) + '°F' }
                             </Typography>
                         </Grid>
                     </Grid>

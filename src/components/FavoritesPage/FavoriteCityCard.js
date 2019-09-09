@@ -16,7 +16,7 @@ class FavoriteCityCard extends Component {
         return `https://developer.accuweather.com/sites/default/files/${iconNum}-s.png`
     }
 
-    searchThisCity = () => {
+    searchCity = () => {
         this.props.cityStore.loadSave(this.props.cityData.name)
     }
 
@@ -25,7 +25,7 @@ class FavoriteCityCard extends Component {
         let navStore = this.props.navStore
         let tempData = (navStore.isCelsius? cityData.currentConditions.temperature.Metric: cityData.currentConditions.temperature.Imperial)
         return (
-            <Grid item to='/' component={Link} onClick={this.searchThisCity} style={{textDecoration: 'none'}}>
+            <Grid item to='/' component={Link} onClick={this.searchCity} style={{textDecoration: 'none'}}>
                 <Card>
                     <Grid container direction="column" justify="center" alignItems="center" style={{ width: '20vh' }}>
                         <Grid item>

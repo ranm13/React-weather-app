@@ -19,7 +19,7 @@ export class FavoritesStore {
         //     localStorage.savedCities = JSON.stringify(this.favoriteCities)   
         // })
         // .catch((err) =>{
-        //      console.log(err)
+        //      return err
         // } )
         let data = CurrentData
         cityToSave.currentConditions = { date: data[0].LocalObservationDateTime,

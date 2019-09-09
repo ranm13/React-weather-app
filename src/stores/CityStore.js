@@ -7,27 +7,29 @@ import ForeCastsData from '../stores/forecasts.json'
 export class CityStore {
     @observable city = {}
     @observable cityNameInput
-
+    @observable isSearching = false
+    
     @action handleInput = value => this.cityNameInput = value
 
     @action handleSavings = () => this.city.isSaved = !this.city.isSaved
 
     @action searchCity =  () => {
-        // axios.get(this.cityKeyUrl(this.cityNameInput))
-        // .then((response) =>{
-        //     this.city.key = response.data[0].Key
-        //     this.city.name = response.data[0].LocalizedName
-        //     this.city.isSaved = (this.city.isSaved? this.city.isSaved: false)
-        //     this.getCityForecasts(this.city.key)  
-        // })
-        // .catch((err) =>{
-        //      console.log(err)
-        // } )
-        let data = KeyDaya
-        this.city.key = data[0].Key
-        this.city.name = data[0].LocalizedName
-        this.city.isSaved = (this.city.isSaved? this.city.isSaved: false)
-        this.getCityForecasts(this.cityKey)
+        this.isSearching = true
+        axios.get(this.cityKeyUrl(this.cityNameInput))
+        .then((response) =>{
+            this.city.key = response.data[0].Key
+            this.city.name = response.data[0].AdministrativeArea.LocalizedName
+            this.city.isSaved = (this.city.isSaved? true : false)
+            this.getCityForecasts(this.city.key)  
+        })
+        .catch((err) =>{
+             return err
+        } )
+        // let data = KeyDaya
+        // this.city.key = data[0].Key
+        // this.city.name = data[0].LocalizedName
+        // this.city.isSaved = (this.city.isSaved? this.city.isSaved: false)
+        // this.getCityForecasts(this.cityKey)
     }
 
     @action loadSave = (cityName) => {
@@ -56,12 +58,12 @@ export class CityStore {
         axios.get(this.geoLocationCityUrl(currentLocation))
         .then((response) => {
             this.city.key = response.data.Key
-            this.city.name = response.data.LocalizedName
-            this.city.isSaved = (this.city.isSaved? this.city.isSaved: false)
+            this.city.name = response.data.AdministrativeArea.LocalizedName
+            this.city.isSaved = (this.city.isSaved? true : false)
             this.getCityForecasts(this.city.key)  
         })
         .catch((err) =>{
-             console.log(err)
+            return err
         } )
     }
 
@@ -72,25 +74,26 @@ export class CityStore {
     geoLocationCityUrl = (location) => `${this.API_HOST}locations/v1/cities/geoposition/search?apikey=${this.API_KEY}&q=${location}`
 
     getCityForecasts = (cityKey) => {
-        // axios.get(this.forecastsUrl(cityKey))
-        // .then((response) => {
-        //     this.city.forecasts = response.data.DailyForecasts.map(f => {
-        //        return  {date: f.Date,
-        //                 day: f.Day,
-        //                 temperature:  f.Temperature
-        //                 }})
-        // .catch((err) =>{
-        //      console.log(err)
-        // } )
-        // })
-        // })
-        let data = ForeCastsData
-        this.city.forecasts = data.DailyForecasts.map(f => {
+        setTimeout(() => this.isSearching = false , 2000) 
+        axios.get(this.forecastsUrl(cityKey))
+        .then((response) => {
+            this.city.forecasts = response.data.DailyForecasts.map(f => {
                return  {date: f.Date,
                         day: f.Day,
                         temperature:  f.Temperature
-                        }})
-    }
+                        }
+                    })})
+        .catch((err) =>{
+             return err
+        })
+        }
+    //     let data = ForeCastsData
+    //     this.city.forecasts = data.DailyForecasts.map(f => {
+    //            return  {date: f.Date,
+    //                     day: f.Day,
+    //                     temperature:  f.Temperature
+    //                     }})
+    // }
 }   
 
 

@@ -6,7 +6,7 @@ import CityWeather from './CityWeather'
 class Landing extends Component {
     render() {
         return (
-        <div >
+        <div className="landing-page" >
             <Grid container justify="center" >
                 <Grid item xs={8} md={4} >
                     <SearchBar />

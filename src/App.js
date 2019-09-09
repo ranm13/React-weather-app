@@ -16,7 +16,7 @@ class App extends Component{
     return (
       <Router>
         <MuiThemeProvider theme={muiTheme} >
-          <div className="App" >
+          <div className={this.props.navStore.theme.palette.type}>
             <NavBar />
             <Route exact path="/" component={Landing}/>
             <Route exact path="/favorites" component={Favorites} />

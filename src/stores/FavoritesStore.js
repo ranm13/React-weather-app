@@ -31,7 +31,7 @@ export class FavoritesStore {
 
     constructor(){
         this.API_KEY = 'uuUVSmGWQ9hWzLPzNCbaaSnNtLr4ykjO'
-        this.API_HOST = 'http://dataservice.accuweather.com/'
+        this.API_HOST = 'https://dataservice.accuweather.com/'
     }
 
     currentConditionsUrl = cityKey => `${this.API_HOST}currentconditions/v1/${cityKey}?apikey=${this.API_KEY}`

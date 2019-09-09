@@ -47,7 +47,7 @@ export class CityStore {
       
     constructor(){
         this.API_KEY = 'uuUVSmGWQ9hWzLPzNCbaaSnNtLr4ykjO'
-        this.API_HOST = 'http://dataservice.accuweather.com/'
+        this.API_HOST = 'https://dataservice.accuweather.com/'
         this.currentLocation = ""
     }
 

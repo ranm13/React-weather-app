@@ -69,7 +69,7 @@ export class CityStore {
      
     forecastsUrl = cityKey => `${this.API_HOST}forecasts/v1/daily/5day/${cityKey}?apikey=${this.API_KEY}&metric=true`
 
-    geoLocationCityUrl = (location) => `${this.API_HOST}locations/v1/cities/geoposition/search?apikey=${this.API_KEY}&q=${location}`
+    geoLocationCityUrl = location => `${this.API_HOST}locations/v1/cities/geoposition/search?apikey=${this.API_KEY}&q=${location}`
 
     getCityForecasts = async (cityKey) => {
         setTimeout(() => this.isSearching = false , 2000) 

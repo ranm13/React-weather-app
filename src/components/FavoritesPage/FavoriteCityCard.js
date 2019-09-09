@@ -17,7 +17,7 @@ class FavoriteCityCard extends Component {
     }
 
     searchCity = () => {
-        this.props.cityStore.loadSave(this.props.cityData.name)
+        this.props.cityStore.loadSave(this.props.cityData.key, this.props.cityData.name)
     }
 
     render() {

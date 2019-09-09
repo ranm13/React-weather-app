@@ -7,25 +7,23 @@ import TodayWeather from './TodayWeather';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 
+
 @inject("cityStore", "navStore")
 
 @observer
 class CityWeather extends Component {
-
     componentDidMount(){
-        // this.props.cityStore.getCityByGeoLocation()
-        // this.props.cityStore.handleInput('tel aviv')
-        // this.props.cityStore.searchCity()
+        if(this.props.cityStore.isFirstEntrance){
+            this.props.cityStore.getCityByGeoLocation()
+        }  
     }
 
     render() {
         let cityStore = this.props.cityStore
         let forecasts = cityStore.city.forecasts
         let backgroundColor = this.props.navStore.theme.palette.type === "light" ? 'rgba(255, 255, 255, 0.7)': 'rgba(0, 0, 0, 0.7)'
-        console.log(backgroundColor)
         return (
-            <Paper className="container" style={{marginTop :"4vh",  height: "70vh", backgroundColor:{backgroundColor}}}>
-                {/* <div>hey</div> */}
+            <Paper className="container" style={{marginTop :"4vh",  height: "70vh", backgroundColor:`${backgroundColor}`}}>
                 {cityStore.isSearching? 
                     <Loader type="CradleLoader" height="100" width="100" style={{position:"absolute", top:"50vh", left:' calc(50vw - 56px)'}}/>
                 :forecasts?

@@ -14,7 +14,7 @@ const navStore = new NavStore()
 
 const stores = {cityStore, favoritesStore, navStore}
 
-ReactDOM.render(<Provider {... stores}>
+ReactDOM.render(<Provider {... stores} >
                     <App />
                 </Provider>, document.getElementById('root'));
 

@@ -10,7 +10,6 @@ export class NavStore {
 
     @action toggleTheme = () => {
         this.theme.palette.type = this.theme.palette.type === "light"? "dark" : "light"
-       
     }
 
     @action toggleTempSign = () => {
